@@ -99,7 +99,7 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; overflow-x: hidden; }
 
     body {
       background: var(--bg);
@@ -167,7 +167,7 @@
     .hero { padding: 130px 0 100px; position: relative; }
     .hero::before {
       content: ''; position: absolute; top: -250px; left: 50%; transform: translateX(-50%);
-      width: 1000px; height: 750px; pointer-events: none;
+      width: min(1000px, 100vw); height: 750px; pointer-events: none;
       background: radial-gradient(ellipse at center, rgba(244, 243, 241, .045), transparent 65%);
     }
     .hero .wrap { position: relative; }
@@ -380,7 +380,7 @@
     .contact { text-align: center; padding: 160px 0 150px; position: relative; overflow: hidden; }
     .contact::before {
       content: 'NK'; position: absolute; left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); max-width: 100vw;
       font-family: var(--serif); font-style: italic; font-weight: 600;
       font-size: clamp(20rem, 48vw, 34rem); line-height: 1;
       color: transparent; -webkit-text-stroke: 1px #1a1a1d;
