@@ -1,4 +1,4 @@
-# Nishant Kushwaha — Portfolio
+﻿# Nishant Kushwaha — Portfolio
 
 Professional, SEO-optimized portfolio website. Single-file, zero dependencies, fast.
 
@@ -18,8 +18,8 @@ Professional, SEO-optimized portfolio website. Single-file, zero dependencies, f
 1. Create a repo named `portfolio` on github.com/iamnishantkushwaha and push these files.
 2. Go to https://vercel.com/new, sign in with GitHub, import the repo.
    No build settings needed — it deploys as a static site.
-3. In Project Settings → General, set the project name to `iamnishantkushwaha`
-   so the URL becomes `https://iamnishantkushwaha.vercel.app`.
+3. In Project Settings → General, set the project name to `nishantkushwaha`
+   so the URL becomes `https://nishantkushwaha.dev`.
 
 **Via CLI (no GitHub needed):**
 ```
@@ -30,7 +30,7 @@ vercel --prod
 
 ## ⚠️ URL note
 
-All SEO files point to `https://iamnishantkushwaha.vercel.app/`. If your deployed
+All SEO files point to `https://nishantkushwaha.dev/`. If your deployed
 URL ends up different, find-and-replace it in `index.html`, `robots.txt`, and
 `sitemap.xml` — a wrong canonical URL hurts ranking.
 
