@@ -161,12 +161,12 @@ h2 { font: 400 clamp(2.8rem, 7.4vw, 7rem) / 0.95 var(--ser); letter-spacing: -0.
 .chips li { border-radius: 99px; padding: 5px 14px; font: 500 0.72rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; background: var(--ink); color: #030303; }
 .chips li.x { background: 0; color: var(--soft); border: 1px dashed #4a4b57; }
 #pipe { width: 100%; height: 80vh; max-height: 760px; }
-#pipe .nd { fill: #030303; stroke: var(--line2); stroke-width: 2; transition: 0.4s; transform-box: fill-box; transform-origin: center; }
-#pipe .nd.a { stroke: var(--a); fill: #0d2b27; animation: nping 0.8s var(--ease); }
+:is(#pipe, #pipe-mobile) .nd { fill: #030303; stroke: var(--line2); stroke-width: 2; transition: 0.4s; transform-box: fill-box; transform-origin: center; }
+:is(#pipe, #pipe-mobile) .nd.a { stroke: var(--a); fill: #0d2b27; animation: nping 0.8s var(--ease); }
 @keyframes nping { 0% { transform: scale(1.9); } 100% { transform: none; } }
-#pipe text { font: 600 14px var(--sans); fill: #5d5e6b; transition: 0.4s; }
-#pipe text.a { fill: var(--ink); }
-#pk { filter: drop-shadow(0 0 8px #2ee6c8) drop-shadow(0 0 18px #2ee6c8); }
+:is(#pipe, #pipe-mobile) text { font: 600 14px var(--sans); fill: #5d5e6b; transition: 0.4s; }
+:is(#pipe, #pipe-mobile) text.a { fill: var(--ink); }
+:is(#pk, #pk-mobile) { filter: drop-shadow(0 0 8px #2ee6c8) drop-shadow(0 0 18px #2ee6c8); }
 
 /* pinned mode (JS on, motion on, wide) */
 .js:not(.nm) .scene { height: 520vh; }
@@ -296,7 +296,7 @@ footer a { text-decoration: none; }
 
 /* ---------- motion off / reduced ---------- */
 .nm .r, .nm .hw > span, .nm .hero2 h1 .w > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
-.nm .mq div, .nm .fig .orbit, .nm .fig .sw, .nm .chip, .nm .hero2 h1 em, .nm .dot, .nm .mk *, .nm .mk *::before, .nm .mk *::after, .nm #pipe .nd, .nm dt, .nm dd, .nm .np > * { animation: none !important; }
+.nm .mq div, .nm .fig .orbit, .nm .fig .sw, .nm .chip, .nm .hero2 h1 em, .nm .dot, .nm .mk *, .nm .mk *::before, .nm .mk *::after, .nm :is(#pipe, #pipe-mobile) .nd, .nm dt, .nm dd, .nm .np > * { animation: none !important; }
 .nm .pj { transform: none !important; filter: none !important; }
 .nm #ld, .nm #cur { display: none; }
 .nm .hero2 h1 em { -webkit-text-fill-color: currentColor; background: none; color: var(--ink); }
@@ -422,4 +422,13 @@ footer a { text-decoration: none; }
   .js .hero2 h1 .w > span { transform: none; animation: none; }
   .fig .sw { display: none; }
   .fig .ph { filter: contrast(1.06) saturate(0.92); }
+}
+
+/* A horizontal skills path keeps labels readable on narrow screens. */
+#pipe-mobile { display: none; }
+@media (max-width: 860px) {
+  .js:not(.nm) #pipe { display: none; }
+  .js:not(.nm) #pipe-mobile { display: block; order: -1; width: 100%; height: auto; align-self: center; }
+  .js:not(.nm) .sg { grid-template-rows: auto minmax(0, 1fr); gap: 24px; }
+  #pipe-mobile text { font-size: 22px; }
 }

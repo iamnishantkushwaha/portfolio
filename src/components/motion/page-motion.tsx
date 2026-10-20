@@ -122,31 +122,33 @@ export function PageMotion() {
   // Skills story: scroll progress drives chapter, path and traveller.
   useGSAP(() => {
     const story = $("#story");
-    const pf = $<SVGPathElement>("#pf");
-    const pk = $("#pk");
-    if (off || !story || !pf || !pk) return;
-    const chs = $$(".ch");
-    const nds = $$("#pn circle");
-    const lbs = $$("#pn text");
-    const len = pf.getTotalLength();
-    pf.style.strokeDasharray = String(len);
-    pf.style.strokeDashoffset = String(len);
-    let last = -1;
-    ScrollTrigger.create({
-      trigger: story, start: "top top", end: "bottom bottom",
-      onUpdate: ({ progress: s }) => {
-        pf.style.strokeDashoffset = String(len * (1 - s));
-        const pt = pf.getPointAtLength(len * s);
-        pk.setAttribute("cx", String(pt.x)); pk.setAttribute("cy", String(pt.y));
-        const ix = Math.round(s * 4);
-        if (ix !== last) {
-          last = ix;
-          chs.forEach((c, i) => { c.classList.toggle("on", i === ix); c.classList.toggle("past", i < ix); });
-        }
-        nds.forEach((n, i) => n.classList.toggle("a", s >= i / 4 - 0.02));
-        lbs.forEach((t, i) => t.classList.toggle("a", s >= i / 4 - 0.02));
-      },
-    });
+    for (const suffix of ["", "-mobile"]) {
+      const pf = $<SVGPathElement>(`#pf${suffix}`);
+      const pk = $(`#pk${suffix}`);
+      if (off || !story || !pf || !pk) continue;
+      const chs = $$(".ch");
+      const nds = $$(`#pn${suffix} circle`);
+      const lbs = $$(`#pn${suffix} text`);
+      const len = pf.getTotalLength();
+      pf.style.strokeDasharray = String(len);
+      pf.style.strokeDashoffset = String(len);
+      let last = -1;
+      ScrollTrigger.create({
+        trigger: story, start: "top top", end: "bottom bottom",
+        onUpdate: ({ progress: s }) => {
+          pf.style.strokeDashoffset = String(len * (1 - s));
+          const pt = pf.getPointAtLength(len * s);
+          pk.setAttribute("cx", String(pt.x)); pk.setAttribute("cy", String(pt.y));
+          const ix = Math.round(s * 4);
+          if (ix !== last) {
+            last = ix;
+            chs.forEach((c, i) => { c.classList.toggle("on", i === ix); c.classList.toggle("past", i < ix); });
+          }
+          nds.forEach((n, i) => n.classList.toggle("a", s >= i / 4 - 0.02));
+          lbs.forEach((t, i) => t.classList.toggle("a", s >= i / 4 - 0.02));
+        },
+      });
+    }
   }, { dependencies: [off], revertOnUpdate: true });
 
   // Everything below mirrors the approved mockup's timings frame for frame.
