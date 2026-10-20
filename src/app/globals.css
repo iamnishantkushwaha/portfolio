@@ -426,7 +426,7 @@ footer a { text-decoration: none; }
 #pipe-mobile { display: none; }
 @media (max-width: 860px) {
   .js:not(.nm) #pipe { display: none; }
-  .js:not(.nm) #pipe-mobile { display: block; grid-row: 2; width: 100%; height: clamp(210px, 34svh, 300px); align-self: center; }
+  .js:not(.nm) #pipe-mobile { display: block; grid-row: 2; width: 100%; height: clamp(250px, 40svh, 350px); align-self: center; }
   .js:not(.nm) .sg { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); gap: 16px; padding-top: 94px; padding-bottom: 64px; }
   .js:not(.nm) .skk { position: static; grid-row: 1; line-height: 1.5; text-wrap: balance; }
   .js:not(.nm) .txt { grid-row: 3; overflow-y: auto; overscroll-behavior-y: auto; scrollbar-width: none; }
@@ -434,10 +434,10 @@ footer a { text-decoration: none; }
   .js:not(.nm) .ch { bottom: auto; min-height: 100%; }
   #pipe-mobile text { font-size: 22px; }
   /* Shorter scroll run so each step advances with a normal swipe. */
-  .js:not(.nm) .scene { height: 330vh; }
+  .js:not(.nm) .scene { height: 250vh; }
 }
 @media (max-width: 860px) and (max-height: 720px) {
-  .js:not(.nm) #pipe-mobile { height: clamp(170px, 28svh, 210px); }
+  .js:not(.nm) #pipe-mobile { height: clamp(200px, 31svh, 240px); }
   .js:not(.nm) .sg { gap: 12px; }
 }
 
