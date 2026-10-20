@@ -34,7 +34,7 @@ export function Story() {
           </g>
           <circle id="pk" r="7" fill="#fff" cx="150" cy="40" />
         </svg>
-        <svg id="pipe-mobile" viewBox="0 0 300 280" role="img" aria-label="A request moving from interface to server, data, integrations and live">
+        <svg id="pipe-mobile" viewBox="64 6 222 264" role="img" aria-label="A request moving from interface to server, data, integrations and live">
           <path d={MOBILE_PATH} fill="none" stroke="#20212a" strokeWidth="3" />
           <path id="pf-mobile" d={MOBILE_PATH} fill="none" stroke="#2ee6c8" strokeWidth="3" />
           <g id="pn-mobile">
