@@ -39,6 +39,8 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [formError, setFormError] = useState("");
   const [scriptReady, setScriptReady] = useState(false);
+  const [nearViewport, setNearViewport] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const widgetRef = useRef<HTMLDivElement>(null);
   const widgetId = useRef<string | undefined>(undefined);
   const inFlight = useRef(false);
@@ -51,6 +53,15 @@ export function ContactForm() {
     defaultValues: { name: "", email: "", subject: "", message: "", turnstileToken: "" },
   });
   const messageLength = (useWatch({ control, name: "message" }) ?? "").length;
+
+  // The captcha script is heavy and the form sits at the bottom of the page, so fetch it only when the form is about to be seen.
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el || nearViewport) return;
+    const io = new IntersectionObserver((entries) => { if (entries.some((e) => e.isIntersecting)) { setNearViewport(true); io.disconnect(); } }, { rootMargin: "600px 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [nearViewport]);
 
   // Render the Turnstile widget once its script is available; tokens are single use, so it is reset after each attempt.
   useEffect(() => {
@@ -124,8 +135,8 @@ export function ContactForm() {
   return (
     // Refs are read only inside the submit handler, never during render.
     // eslint-disable-next-line react-hooks/refs
-    <form className="cf-card" onSubmit={handleSubmit(onSubmit)} noValidate aria-busy={busy}>
-      {SITE_KEY && <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setScriptReady(true)} />}
+    <form ref={formRef} className="cf-card" onSubmit={handleSubmit(onSubmit)} noValidate aria-busy={busy}>
+      {SITE_KEY && nearViewport && <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setScriptReady(true)} />}
 
       <div className="cf-grid">
         <Field id={idOf("name")} label="Full Name" error={errors.name?.message}>
