@@ -424,11 +424,11 @@ footer a { text-decoration: none; }
   .fig .ph { filter: contrast(1.06) saturate(0.92); }
 }
 
-/* A horizontal skills path keeps labels readable on narrow screens. */
+/* Compact vertical skills path with readable labels on narrow screens. */
 #pipe-mobile { display: none; }
 @media (max-width: 860px) {
   .js:not(.nm) #pipe { display: none; }
-  .js:not(.nm) #pipe-mobile { display: block; order: -1; width: 100%; height: auto; align-self: center; }
+  .js:not(.nm) #pipe-mobile { display: block; order: -1; width: 100%; height: clamp(170px, 30svh, 260px); align-self: center; }
   .js:not(.nm) .sg { grid-template-rows: auto minmax(0, 1fr); gap: 24px; }
   #pipe-mobile text { font-size: 22px; }
 }

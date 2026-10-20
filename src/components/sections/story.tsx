@@ -1,7 +1,7 @@
 import { chapters, pipeline } from "@/content/portfolio";
 
 const PATH = "M150 40C40 90 260 90 150 140C40 190 260 190 150 240C40 290 260 290 150 340C40 390 260 390 150 440";
-const MOBILE_PATH = "M40 40C80 10 120 70 160 40C200 10 240 70 280 40C320 10 360 70 400 40C440 10 480 70 520 40";
+const MOBILE_PATH = "M95 30C40 48 150 67 95 85C40 103 150 122 95 140C40 158 150 177 95 195C40 213 150 232 95 250";
 
 export function Story() {
   return (
@@ -34,14 +34,14 @@ export function Story() {
           </g>
           <circle id="pk" r="7" fill="#fff" cx="150" cy="40" />
         </svg>
-        <svg id="pipe-mobile" viewBox="0 0 560 110" role="img" aria-label="A request moving from interface to server, data, integrations and live">
+        <svg id="pipe-mobile" viewBox="0 0 300 280" role="img" aria-label="A request moving from interface to server, data, integrations and live">
           <path d={MOBILE_PATH} fill="none" stroke="#20212a" strokeWidth="3" />
           <path id="pf-mobile" d={MOBILE_PATH} fill="none" stroke="#2ee6c8" strokeWidth="3" />
           <g id="pn-mobile">
-            {pipeline.map((_, i) => <circle key={i} className={`nd${i === 0 ? " a" : ""}`} cx={40 + i * 120} cy="40" r="12" />)}
-            {pipeline.map((label, i) => <text key={label} className={i === 0 ? "a" : undefined} x={40 + i * 120} y="84" textAnchor="middle">{label}</text>)}
+            {pipeline.map((_, i) => <circle key={i} className={`nd${i === 0 ? " a" : ""}`} cx="95" cy={30 + i * 55} r="10" />)}
+            {pipeline.map((label, i) => <text key={label} className={i === 0 ? "a" : undefined} x="125" y={37 + i * 55}>{label}</text>)}
           </g>
-          <circle id="pk-mobile" r="6" fill="#fff" cx="40" cy="40" />
+          <circle id="pk-mobile" r="6" fill="#fff" cx="95" cy="30" />
         </svg>
       </div>
     </div>
