@@ -1,4 +1,3 @@
-import { Contact } from "@/components/sections/contact";
 import { ContactSection } from "@/components/sections/contact-section";
 import { Fit } from "@/components/sections/fit";
 import { Hero } from "@/components/sections/hero";
@@ -18,7 +17,6 @@ export default function HomePage() {
       <Projects />
       <Fit />
       <Journey />
-      <Contact />
       <ContactSection />
       <Services />
       <Faq />
