@@ -429,7 +429,8 @@ footer a { text-decoration: none; }
   .js:not(.nm) #pipe-mobile { display: block; grid-row: 2; width: 100%; height: clamp(210px, 34svh, 300px); align-self: center; }
   .js:not(.nm) .sg { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); gap: 16px; padding-top: 94px; padding-bottom: 64px; }
   .js:not(.nm) .skk { position: static; grid-row: 1; line-height: 1.5; text-wrap: balance; }
-  .js:not(.nm) .txt { grid-row: 3; overflow-y: auto; overscroll-behavior-y: auto; }
+  .js:not(.nm) .txt { grid-row: 3; overflow-y: auto; overscroll-behavior-y: auto; scrollbar-width: none; }
+  .js:not(.nm) .txt::-webkit-scrollbar { display: none; }
   .js:not(.nm) .ch { bottom: auto; min-height: 100%; }
   #pipe-mobile text { font-size: 22px; }
   /* Shorter scroll run so each step advances with a normal swipe. */
