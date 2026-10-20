@@ -141,7 +141,7 @@ h2 { font: 400 clamp(2.8rem, 7.4vw, 7rem) / 0.95 var(--ser); letter-spacing: -0.
 .fig .glow { position: absolute; left: 50%; top: 46%; width: 76%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(closest-side, #2ee6c866, #2ee6c814 60%, transparent); filter: blur(14px); }
 .fig .dots { position: absolute; inset: 0; background: radial-gradient(#2ee6c888 1.2px, transparent 1.6px) 0 0/10px 10px; mask-image: linear-gradient(90deg, transparent 55%, #000); opacity: 0.55; pointer-events: none; }
 .fig .tilt { position: absolute; inset: 0; transform: var(--tf, none); transition: transform 0.25s ease-out; }
-.fig .ph { position: absolute; inset: 0; background: var(--ph) center bottom/contain no-repeat; mask-image: linear-gradient(#000 70%, transparent 98%), linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); mask-composite: intersect; -webkit-mask-composite: source-in; filter: contrast(1.06) saturate(0.92) drop-shadow(0 0 1px #8ef2e0) drop-shadow(0 0 22px #2ee6c833); }
+.fig .ph { position: absolute; inset: 0; object-fit: contain; object-position: center bottom; mask-image: linear-gradient(#000 70%, transparent 98%), linear-gradient(90deg, transparent, #000 16%, #000 84%, transparent); mask-composite: intersect; -webkit-mask-composite: source-in; filter: contrast(1.06) saturate(0.92) drop-shadow(0 0 1px #8ef2e0) drop-shadow(0 0 22px #2ee6c833); }
 .fig .sw { position: absolute; inset: 0; mask-image: var(--ph); mask-size: contain; mask-position: center bottom; mask-repeat: no-repeat; background: linear-gradient(105deg, transparent 40%, #8ef2e088 50%, transparent 60%) 0 0/250% 100%; mix-blend-mode: screen; animation: swp 5.5s ease-in-out infinite; }
 @keyframes swp { 0% { background-position: 130% 0; } 55%, 100% { background-position: -60% 0; } }
 .chip { position: absolute; padding: 8px 13px; border: 1px solid #ffffff26; border-radius: 99px; background: #0b0b0ccc; backdrop-filter: blur(6px); font: 500 0.68rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; animation: bob 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
@@ -415,3 +415,11 @@ footer a { text-decoration: none; }
   .chips li { padding: 4px 10px; font-size: 0.62rem; }
 }
 @media (min-width: 600px) and (max-width: 860px) { .js:not(.nm) #pipe { height: 38vh; } }
+
+/* Keep mobile hero content visible during the first paint. */
+@media (max-width: 860px) {
+  .js #ld { display: none; }
+  .js .hero2 h1 .w > span { transform: none; animation: none; }
+  .fig .sw { display: none; }
+  .fig .ph { filter: contrast(1.06) saturate(0.92); }
+}

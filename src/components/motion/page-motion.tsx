@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useSyncExternalStore } from "react";
+import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useMotion } from "./motion-provider";
-import { Cursor } from "./cursor";
 import { sections } from "@/content/portfolio";
+
+const Cursor = dynamic(() => import("./cursor").then((module) => module.Cursor), { ssr: false });
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -46,8 +48,8 @@ function scramble(target: ScrambleEl | Text | null, o: ScrambleOpts = {}) {
     if (now - last > step || x >= 1) {
       last = now;
       cur = [...text].map((c, i) => (i < k || !/[A-Za-z0-9]/.test(c) ? c : rnd())).join("");
+      target.textContent = x >= 1 ? text : cur;
     }
-    target.textContent = x >= 1 ? text : cur;
     if (x < 1) {
       const id = requestAnimationFrame(f);
       if (isText) st!.raf = id; else target._raf = id;
@@ -149,7 +151,7 @@ export function PageMotion() {
 
   // Everything below mirrors the approved mockup's timings frame for frame.
   useEffect(() => {
-    if (off) return;
+    if (off || !pointerFine) return;
     const root = document.documentElement;
     const cleanups: Array<() => void> = [];
     const timers: number[] = [];
@@ -180,11 +182,16 @@ export function PageMotion() {
         mt = window.setTimeout(() => { mq.style.transform = "skewX(0deg)"; }, 140);
       }
     };
-    const onScroll = () => requestAnimationFrame(v);
+    let scrollFrame = 0;
+    const onScroll = () => {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => { scrollFrame = 0; v(); });
+    };
     addEventListener("scroll", onScroll, { passive: true });
     v();
     cleanups.push(() => {
       removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(scrollFrame);
       clearTimeout(mt);
       if (h1) h1.style.transform = "";
       if (mq) mq.style.transform = "";
@@ -276,7 +283,7 @@ export function PageMotion() {
     }
 
     return () => { cleanups.forEach((c) => c()); timers.forEach(clearTimeout); };
-  }, [off]);
+  }, [off, pointerFine]);
 
   return pointerFine && !off ? <Cursor /> : null;
 }

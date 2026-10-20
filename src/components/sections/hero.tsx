@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { marquee } from "@/content/portfolio";
 import { ResumeButton } from "@/components/ui/resume-button";
 
@@ -24,7 +25,7 @@ export function Hero() {
         <div className="fig" style={{ ["--ph" as string]: 'url("/images/portrait.webp")' }}>
           <div className="glow" /><div className="orbit" /><div className="orbit r2" /><div className="dots" />
           <div className="tilt">
-            <div className="ph" role="img" aria-label="Portrait of Nishant Kushwaha" />
+            <Image className="ph" src="/images/portrait.webp" alt="Portrait of Nishant Kushwaha" fill sizes="(max-width: 860px) 380px, (max-width: 1200px) 44vw, 560px" preload />
             <div className="sw" aria-hidden="true" />
           </div>
           <span className="chip c1" aria-hidden="true">React</span>
