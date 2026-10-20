@@ -426,8 +426,8 @@ footer a { text-decoration: none; }
 #pipe-mobile { display: none; }
 @media (max-width: 860px) {
   .js:not(.nm) #pipe { display: none; }
-  .js:not(.nm) #pipe-mobile { display: block; grid-row: 2; width: 100%; height: clamp(250px, 40svh, 350px); align-self: center; }
-  .js:not(.nm) .sg { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); gap: 16px; padding-top: 94px; padding-bottom: 64px; }
+  .js:not(.nm) #pipe-mobile { display: block; grid-row: 2; width: 100%; height: clamp(270px, 41svh, 400px); align-self: center; }
+  .js:not(.nm) .sg { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); gap: clamp(16px, 3.4svh, 40px); padding-top: 94px; padding-bottom: 22px; }
   .js:not(.nm) .skk { position: static; grid-row: 1; line-height: 1.5; text-wrap: balance; }
   .js:not(.nm) .txt { grid-row: 3; overflow: hidden; }
   .js:not(.nm) .ch { bottom: auto; min-height: 100%; }
