@@ -62,7 +62,7 @@ export const structuredData = {
       name: identity.name,
       url: canonicalUrl,
       image: `${canonicalUrl}images/portrait.webp`,
-      email: `mailto:${identity.email}`,
+      email: identity.email,
       jobTitle: identity.role,
       description: identity.description,
       address: { "@type": "PostalAddress", addressLocality: "Jabalpur", addressRegion: "Madhya Pradesh", addressCountry: "IN" },
@@ -162,7 +162,7 @@ ${services.map((s) => `- ${s.name}: ${s.detail}`).join("\n")}
 
 ## Key facts
 - Location: ${identity.location} (remote friendly)
-${recruiterRows.map((r) => `- ${r.label}: ${r.value}`).join("\n")}
+${recruiterRows.filter((r) => r.label !== "Stack").map((r) => `- ${r.label}: ${r.value}`).join("\n")}
 - Stack: ${skills.join(", ")}
 - AI services (Gemini, Groq, OpenAI, WhatsApp) are integrations inside products, not a core specialty
 
