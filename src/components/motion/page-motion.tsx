@@ -111,12 +111,27 @@ export function PageMotion() {
     sync(progress);
   }, []);
 
-  // Timeline line draw.
+  // Keep milestone states aligned with the line's scroll position.
   useGSAP(() => {
     const tl = $("#tl");
     if (!tl) return;
-    if (off) { tl.style.setProperty("--p", "1"); return; }
-    ScrollTrigger.create({ trigger: tl, start: "top 70%", end: "bottom 70%", onUpdate: (s) => tl.style.setProperty("--p", String(s.progress)) });
+    const milestones = [...tl.children].filter((el): el is HTMLElement => el instanceof HTMLElement);
+    const sync = (s: ScrollTrigger) => {
+      tl.style.setProperty("--p", String(s.progress));
+      const reached = s.progress * tl.offsetHeight;
+      let current = -1;
+      milestones.forEach((el, i) => { if (reached >= el.offsetTop + 14.5) current = i; });
+      milestones.forEach((el, i) => {
+        el.toggleAttribute("data-current", i === current);
+        el.toggleAttribute("data-passed", i < current);
+      });
+    };
+    const trigger = ScrollTrigger.create({ trigger: tl, start: "top 70%", end: "bottom 70%", onUpdate: sync, onRefresh: sync });
+    sync(trigger);
+    return () => {
+      tl.style.removeProperty("--p");
+      milestones.forEach((el) => { el.removeAttribute("data-current"); el.removeAttribute("data-passed"); });
+    };
   }, { dependencies: [off], revertOnUpdate: true });
 
   // Skills story: scroll progress drives chapter, path and traveller.

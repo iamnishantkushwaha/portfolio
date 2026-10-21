@@ -80,7 +80,9 @@ em { font-family: var(--ser); font-style: italic; font-size: 1.1em; line-height:
 .cur-ring svg { opacity: 0; scale: 0.4; transition: opacity 0.3s ease-out, scale 0.3s ease-out, rotate 0.3s ease-out; }
 .cur-ring.hot { width: 26px; height: 26px; background: transparent; }
 .cur-ring.hot svg { opacity: 1; scale: 1; }
-.cur-ring.down { scale: 0.8; }
+.cur-ring { translate: -50% -50%; }
+.cur-ring.down { width: 4px; height: 4px; }
+.cur-ring.hot.down { width: 21px; height: 21px; }
 .cur-label { position: fixed; left: 0; top: 0; white-space: nowrap; font: 500 0.58rem var(--mono); letter-spacing: 0.22em; text-transform: uppercase; opacity: 0; transition: opacity 0.2s; }
 html.cur-on, html.cur-on *:not(input):not(textarea):not(select) { cursor: none !important; }
 
@@ -284,7 +286,10 @@ dd a { text-decoration: underline; text-underline-offset: 4px; }
 .tl { position: relative; border-left: 1px solid var(--line2); }
 .tl::after { content: ""; position: absolute; left: -1px; top: 0; bottom: 0; width: 2px; background: linear-gradient(var(--a), var(--b)); transform-origin: top; transform: scaleY(var(--p, 1)); }
 .tl > div { padding: 0 0 42px 32px; position: relative; }
-.tl > div::before { content: ""; position: absolute; left: -5px; top: 10px; width: 9px; height: 9px; border-radius: 50%; background: linear-gradient(var(--a), var(--b)); }
+.tl > div::before { content: ""; position: absolute; z-index: 1; left: -5px; top: 10px; width: 9px; height: 9px; border-radius: 50%; background: #030303; border: 1px solid var(--line2); transition: scale 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s; }
+.tl > div[data-passed]::before { background: var(--a); border-color: var(--a); }
+.tl > div[data-current]::before { background: var(--a); border-color: var(--a); scale: 1.65; box-shadow: 0 0 0 4px #030303, 0 0 0 5px color-mix(in srgb, var(--a) 55%, transparent), 0 0 16px color-mix(in srgb, var(--a) 45%, transparent); }
+.nm .tl > div::before { transition: none; }
 .tl small { font: 500 0.72rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--mut); }
 .tl h3 { font: 400 clamp(1.8rem, 3.4vw, 2.8rem) / 0.95 var(--ser); letter-spacing: -0.025em; }
 .tl p { color: var(--soft); }

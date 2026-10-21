@@ -94,7 +94,7 @@ export function Cursor() {
       const dx = mx - x, dy = my - y;
       x += dx * 0.34; y += dy * 0.34;
       const speed = Math.min(Math.hypot(dx, dy) / 140, 1);
-      rg.style.transform = `translate3d(${x}px,${y}px,0) translate(-50%,-50%)`;
+      rg.style.transform = `translate3d(${x}px,${y}px,0)`;
       lb.style.transform = `translate3d(${x + 20}px,${y + 16}px,0)`;
       len += (4 + 18 * speed - len) * 0.12;
       const last = pts[pts.length - 1];
